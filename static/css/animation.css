@@ -1,0 +1,44 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  @-webkit-keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .loader {
+    border-width: 0.25rem;
+    border-style: solid;
+    border-color: gainsboro gainsboro dodgerblue gainsboro;
+    border-radius: 50%;
+    display: block;
+    width: 4rem;
+    height: 4rem;
+    -webkit-animation: rotate 1.5s linear infinite;
+            animation: rotate 1.5s linear infinite;
+  }

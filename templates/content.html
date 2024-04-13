@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+        <title>Book Report Form</title>
+    </head>
+    <body>
+        <div class="card-header">
+            <h4>Book Report Form</h4>
+        </div>
+        <div>
+            <div class="card-header">
+                <h6>Scaned Result</h6>
+            </div>
+            <div style="margin-left:20px;">
+            {%for i in range(len)%}
+            <div id="item{{i}}" onclick="Fill(this.id)"><label>BookName: {{((query[i])['data'])['BookName_EN']}}</label><label style="margin-left: 40px;">suitability {{(query[i])['sim_rate']}}</label></label></div><hr/><br />
+            {%endfor%}
+            <div>
+        </div>
+        <div>
+            <div class="card-header">
+                <h6>Scaned Result</h6>
+            </div>
+            <div style="margin-left:20px;">
+            <form action="/insert" method="POST" enctype="multipart/form-data">
+                <table>
+                    <input type="hidden" name="img" id="file" />
+                    <tr><td rowspan="7"><img src="" id="img" /></td><td>BookName</td><td>:</td><td><input
+                                type="text" name="name_en" id="name" /></td></tr>
+                    <tr><td>Author</td><td>:</td><td><input type="text"
+                                name="author" id="author" /></td></tr>
+                    <tr><td>Publisher</td><td>:</td><td><input type="text"
+                                name="public" id="publisher" /></td></tr>
+                    <tr><td>Publish Year</td><td>:</td><td><input type="text"
+                                name="year" id="year" /></td></tr>
+                    <tr><td>Subject</td><td>:</td><td><input type="text"
+                                name="subject" id="sub" /></td></tr>
+                    <tr><td>Language</td><td>:</td><td><input type="text"
+                                name="lang" id="lang" /></td></tr>
+                    <tr><td>ISBN</td><td>:</td><td><input type="text"
+                                name="isbn" id="isbn" /></td></tr>
+                </table>
+                <label>Reading Feeling</label><br />
+                <textarea rows="7" name="feeling"
+                    cols="50">Please write down your feeling after reading the book.</textarea>
+                <input type="submit" />
+            </form>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript">
+        function Fill(id){
+            n = parseInt(id.replace("item",""));
+            data =  JSON.parse('{{query|tojson}}');
+            console.log(data[n]['data']['img']);
+            document.getElementById('file').value = data[n]['data']['img'];
+            document.getElementById('img').src = data[n]['data']['img'];
+            document.getElementById('name').value = data[n]['data']['BookName_EN'];
+            document.getElementById('author').value = data[n]['data']['Author'];
+            document.getElementById('publisher').value = data[n]['data']['Publication'];
+            document.getElementById('year').value = data[n]['data']['Publication_Year'];
+            document.getElementById('sub').value = data[n]['data']['Subject'];
+            document.getElementById('lang').value = data[n]['data']['Language'];
+            document.getElementById('isbn').value = data[n]['data']['ISBN'];
+            console.log(document.getElementById('img').getAttribute('src'))
+        }
+    </script>
+</html>
