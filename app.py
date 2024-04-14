@@ -10,11 +10,11 @@ app = Flask(__name__)
 
 app.config["UPLOAD_FOLDER"] = "static/uploads/"
 
+sign = "false"
 account = []
-login = False
+
 @app.route('/')
 def upload_file():
-    value = QueryBook("leading with")
     return render_template('index.html')
 
 @app.route('/display', methods = ['GET', 'POST'])
@@ -28,11 +28,13 @@ def display_file():
         result = Recognition(image)
         #query = QueryBook("Leading With Principle")
         query = QueryBook(result)
-    return render_template('content.html', len = len(query),query=query)
+    return render_template('content.html', len = len(query),query=query, login = login)
+
 
 @app.route('/login')
 def loginPage():
     return render_template('login.html',msg ="")
+
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -40,7 +42,8 @@ def login():
         pwd = request.form['pwd']
         account = Login(id,pwd)
     if(len(account)>0):
-        login = True
+        global sign
+        sign = "true"
         return render_template('index2.html',msg = "Welcome Back!")
     else:
         return render_template('login.html',msg ="Sorry, your account ID or password is incorrect, Please try again")
@@ -51,6 +54,10 @@ def index2():
 
 @app.route('/out')
 def sign_out():
+    global sign
+    sign ="false"
+    global account
+    account = []
     return render_template('index.html')
 
 @app.route('/new_report')
@@ -74,9 +81,7 @@ def insert_Report():
         feeling = request.form['feeling']
         isbn = request.form['isbn']
         if(len(account)>0):
-            data = json.loads(account)
-            id = data['AccID']
-            print(id)
+            id = str(account[0]['AccID'])
         InsertReport(id,name_en,author,public,year,img,subject,lang,isbn,feeling)
     return render_template('finish.html', login = login)
 if __name__ == '__main__':

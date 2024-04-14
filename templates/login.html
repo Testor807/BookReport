@@ -5,7 +5,6 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
         <!-- Bootstrap CSS -->
         <link
             href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
@@ -76,11 +75,17 @@
                             required>
                         <label for="floatingInput">Account ID</label>
                     </div>
+                    <div class="form-floating" style="display:none;">
+                        <input type="password" class="form-control"
+                            name="pwd" id="pwd"
+                            placeholder="Password" >
+                    </div>
                     <div class="form-floating">
                         <input type="password" class="form-control"
-                            name="pwd" id="floatingPassword"
-                            placeholder="Password" required>
+                            name="pw" id="floatingPassword"
+                            placeholder="Password" required onchange="Convert()">
                         <label for="floatingPassword">Password</label>
+                        <input type="checkbox" onclick="showPW()" />Show Password
                     </div>
                     <button class="btn btn-primary w-100 py-2"
                         type="submit">Sign in</button>
@@ -105,6 +110,18 @@
             } else {
                 document.getElementById("action").value = "SignIn";
             }
+            function Convert(){
+              var p = document.getElementById("floatingPassword").value;
+              document.getElementById("pwd").value = window.btoa(p);
+            }
+            function showPW() {
+            var x = document.getElementById("Password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+    }
     </script>
     </body>
 

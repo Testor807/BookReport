@@ -1,38 +1,29 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
     <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- Bootstrap CSS -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-            crossorigin="anonymous" />
-        <link href="/static/css/navbar_m.css" rel="stylesheet">
-        <link href="/static/css/sign.css" rel="stylesheet">
-        <!--<link href="../static/css/bootstrap.min.css" rel="stylesheet" />-->
-        <script src="/static/jslib/jquery-1.11.1.js"></script>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
         <title>Book Report Form</title>
     </head>
-
     <body>
         <style>
-    .icon{
-        width:30px;
-        height:30px;
-    }
-    .nav-item{
-        margin-left:20px;
-    }
-</style>
-        <div>
+            .icon{
+                width:30px;
+                height:30px;
+            }
+            .nav-item{
+                margin-left:20px;
+            }
+        </style>
+        <div class="card-header">
+            
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container">
-                    <a class="navbar-brand" href="#">Navbar</a>
+                    <a class="navbar-brand" href="#">Book Report -- Upload Book
+                        Image</a>
                     <button class="navbar-toggler" type="button" id="btn"
                         data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent"
@@ -42,6 +33,20 @@
                     </button>
                     <div class="collapse navbar-collapse"
                         id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active"
+                                    href="/home"><img class="icon"
+                                        src="\static\icon\home.png" /></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active"
+                                    href="/out"><img
+                                        class="icon"
+                                        id="icon"
+                                        src="\static\icon\logout.png" /></a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </nav>
@@ -56,7 +61,6 @@
             {%endfor%}
             <div>
         </div>
-        <div id="sign" style="display:none;">{{sign}}</div>
         <div>
             <div class="card-header">
                 <h6>Scaned Result</h6>
@@ -68,50 +72,40 @@
                     <tr><td rowspan="7"><img src="" id="img" /></td><td>BookName</td><td>:</td><td><input
                                 type="text" name="name_en" id="name" /></td></tr>
                     <tr><td>Author</td><td>:</td><td><input type="text"
-                                name="author" id="author" required/></td></tr>
+                                name="author" id="author" /></td></tr>
                     <tr><td>Publisher</td><td>:</td><td><input type="text"
-                                name="public" id="publisher" required/></td></tr>
+                                name="public" id="publisher" /></td></tr>
                     <tr><td>Publish Year</td><td>:</td><td><input type="text"
-                                name="year" id="year" required/></td></tr>
+                                name="year" id="year" /></td></tr>
                     <tr><td>Subject</td><td>:</td><td><input type="text"
-                                name="subject" id="sub" required/></td></tr>
+                                name="subject" id="sub" /></td></tr>
                     <tr><td>Language</td><td>:</td><td><input type="text"
-                                name="lang" id="lang" required/></td></tr>
+                                name="lang" id="lang" /></td></tr>
                     <tr><td>ISBN</td><td>:</td><td><input type="text"
-                                name="isbn" id="isbn" required /></td></tr>
+                                name="isbn" id="isbn" /></td></tr>
                 </table>
                 <label>Reading Feeling</label><br />
                 <textarea rows="7" name="feeling"
                     cols="50">Please write down your feeling after reading the book.</textarea>
                 <input type="submit" />
             </form>
+            </div>
         </div>
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous">
-        </script>
-        <script>
-          var login = document.getElementById("sign").innerHTML;
-          console.log(login)
-          if(login == "false"){
-            var str = '<ul class="navbar-nav ms-auto mb-2 mb-lg-0"><li class="nav-item">';
-            str += '<a class="nav-link active" href="/"><img class="icon" src="\\static\\icon\\home.png" /></a></li>';
-            str += '<li class="nav-item"><a class="nav-link active" href="/login"><img class="icon" src="\\static\\icon\\login.png" /></a>';
-            str += '</li></ul>';
-            document.getElementById("navbarSupportedContent").innerHTML = str;
-          }else{
-            var str = '<ul class="navbar-nav ms-auto mb-2 mb-lg-0"><li class="nav-item">';
-            str += '<a class="nav-link active" href="/home"><img class="icon" src="\\static\\icon\\home.png" /></a></li>';
-            str += '<li class="nav-item"><a class="nav-link active" href="/out"><img class="icon" src="\\static\\icon\\logout.png" /></a>';
-            str += '</li></ul>';
-            document.getElementById("navbarSupportedContent").innerHTML = str;
-          }
-        </script>
-         <script type="text/javascript">
-          function Fill(id){
+        <div id="msg" style="display: none;">{{login}}<div>
+            <script>
+                var login = document.getElementById(msg).innerHTML;
+                if(login == "True"){
+                    document.getElementById("icon").src = "\static\icon\logout.png";
+                }else{
+                    document.getElementById("icon").src = "\static\icon\login.png";
+                }
+            </script>
+    </body>
+    <script type="text/javascript">
+        function Fill(id){
             n = parseInt(id.replace("item",""));
             data =  JSON.parse('{{query|tojson}}');
+            console.log(data[n]['data']['img']);
             document.getElementById('file').value = data[n]['data']['img'];
             document.getElementById('img').src = data[n]['data']['img'];
             document.getElementById('name').value = data[n]['data']['BookName_EN'];
@@ -121,8 +115,7 @@
             document.getElementById('sub').value = data[n]['data']['Subject'];
             document.getElementById('lang').value = data[n]['data']['Language'];
             document.getElementById('isbn').value = data[n]['data']['ISBN'];
+            console.log(document.getElementById('img').getAttribute('src'))
         }
     </script>
-    </body>
-
 </html>
